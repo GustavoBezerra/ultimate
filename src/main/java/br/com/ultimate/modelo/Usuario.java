@@ -1,14 +1,23 @@
 package br.com.ultimate.modelo;
 
 import com.google.gson.Gson;
-import netscape.javascript.JSObject;
+
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Created by Gustavo on 27/05/2017.
  * Classe responsável pelos dados comuns de acesso dos usuários
  */
+@Entity
 public class Usuario {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String login;
     private String senha;
 

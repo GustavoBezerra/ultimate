@@ -1,4 +1,4 @@
-package main.java.br.com.ultimate.controller;
+package br.com.ultimate.controller;
 
 import org.json.JSONException;
 import org.json.JSONObject;

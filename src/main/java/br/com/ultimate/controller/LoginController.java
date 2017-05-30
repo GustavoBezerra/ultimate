@@ -1,4 +1,4 @@
-package main.java.br.com.ultimate.controller;
+package br.com.ultimate.controller;
 
 import br.com.ultimate.modelo.Usuario;
 import org.json.JSONObject;

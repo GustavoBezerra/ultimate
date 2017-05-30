@@ -1,7 +1,5 @@
 package br.com.ultimate.modelo;
 
-import br.com.ultimate.modelo.Nota;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
