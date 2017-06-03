@@ -1,9 +1,12 @@
 package br.com.ultimate.modelo;
 
+import javax.persistence.Entity;
+
 /**
  * Created by Gustavo on 27/05/2017.
  * Classe responsável por representar um Aluno
  */
+@Entity
 public class Aluno extends Pessoa{
 
     //private int matricula;
