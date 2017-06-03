@@ -7,11 +7,29 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	<persistence-unit name="ultimate-postgres">
 		<!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
 		<class>br.com.ultimate.modelo.Usuario</class>
+		<class>br.com.ultimate.modelo.Aluno</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5433/aws" />
 			<property name="javax.persistence.jdbc.user" value="postgres" />
 			<property name="javax.persistence.jdbc.password" value="123Fatec" />
+
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="ultimate-aws">
+		<!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
+		<class>br.com.ultimate.modelo.Usuario</class>
+		<class>br.com.ultimate.modelo.Aluno</class>
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://dbhomolog.c3unfapwzo6m.sa-east-1.rds.amazonaws.com:5432/homolog" />
+			<property name="javax.persistence.jdbc.user" value="scifer" />
+			<property name="javax.persistence.jdbc.password" value="ultimate1605" />
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
