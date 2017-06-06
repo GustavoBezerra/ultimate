@@ -1,13 +1,10 @@
 package br.com.ultimate.testes;
 
-import br.com.ultimate.modelo.Aluno;
-import br.com.ultimate.modelo.NumeroAula;
-import br.com.ultimate.modelo.NumeroLivro;
-import br.com.ultimate.modelo.Usuario;
-import br.com.ultimate.util.JPAUtil;
+import br.com.ultimate.dao.PessoaDAO;
+import br.com.ultimate.modelo.*;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Created by Gustavo on 27/05/2017.
@@ -15,9 +12,14 @@ import java.time.LocalDate;
 public class Main {
 
     public static void main(String[] args) {
+        PessoaDAO pessoaDAO = new PessoaDAO();
         Usuario usuario = new Usuario();
         usuario.setSenha("123");
         usuario.setLogin("teste");
+
+        Usuario usuarioProfessor = new Usuario();
+        usuarioProfessor.setSenha("123");
+        usuarioProfessor.setLogin("professor");
 
         Aluno aluno = new Aluno();
         aluno.setUsuario(usuario);
@@ -26,13 +28,17 @@ public class Main {
         aluno.setLivro(NumeroLivro.LIVRO_1);
         aluno.setNumeroAula(NumeroAula.AULA_3);
 
-        EntityManager entityManager = new JPAUtil().getEntityManager();
-        entityManager.getTransaction().begin();
+        Professor professor = new Professor();
+        professor.setNome("Le");
+        professor.setDtCadastro(LocalDate.now());
+        professor.setUsuario(usuarioProfessor);
 
-        entityManager.persist(usuario);
-        entityManager.persist(aluno);
 
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        pessoaDAO.salvar(aluno);
+        pessoaDAO.salvar(professor);
+        List<Professor> list = pessoaDAO.getList(Professor.class);
+        for(Professor a : list){
+            System.out.println("ID: "+a.getId()+" - "+a.getNome());
+        }
     }
 }
