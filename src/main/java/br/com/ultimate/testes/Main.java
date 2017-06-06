@@ -15,11 +15,11 @@ public class Main {
         PessoaDAO pessoaDAO = new PessoaDAO();
         Usuario usuario = new Usuario();
         usuario.setSenha("123");
-        usuario.setLogin("teste");
+        usuario.setLogin("gustavo");
 
         Usuario usuarioProfessor = new Usuario();
         usuarioProfessor.setSenha("123");
-        usuarioProfessor.setLogin("professor");
+        usuarioProfessor.setLogin("lele");
 
         Aluno aluno = new Aluno();
         aluno.setUsuario(usuario);
@@ -34,11 +34,8 @@ public class Main {
         professor.setUsuario(usuarioProfessor);
 
 
-        pessoaDAO.salvar(aluno);
-        pessoaDAO.salvar(professor);
-        List<Professor> list = pessoaDAO.getList(Professor.class);
-        for(Professor a : list){
-            System.out.println("ID: "+a.getId()+" - "+a.getNome());
-        }
+        Pessoa gustavo = pessoaDAO.buscarUsuario("gustavo", "123");
+        System.out.println("ID: "+gustavo.getId());
+
     }
 }

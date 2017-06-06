@@ -2,10 +2,12 @@ package br.com.ultimate.dao;
 
 import br.com.ultimate.modelo.Aluno;
 import br.com.ultimate.modelo.Pessoa;
+import br.com.ultimate.modelo.Usuario;
 import br.com.ultimate.util.JPAUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
@@ -81,4 +83,32 @@ public class PessoaDAO<T extends Pessoa, Integer>{
         entityManager.close();
         return t;
     }
+
+    public Pessoa buscarUsuario(String login, String senha){
+        openConnection();
+        String jpql = "select u from Usuario u where u.login=:pLogin "
+                + "and u.senha=:pSenha";
+
+        TypedQuery<Usuario> user = entityManager.createQuery(jpql, Usuario.class);
+
+        user.setParameter("pLogin", login);
+        user.setParameter("pSenha", senha);
+
+
+        Usuario usuario = user.getSingleResult();
+
+        if(usuario != null){
+            jpql = "select p from Pessoa p where p.usuario=:pUsuario";
+            TypedQuery<Pessoa> query = entityManager.createQuery(jpql, Pessoa.class);
+            query.setParameter("pUsuario", usuario);
+            Pessoa retorno = query.getSingleResult();
+            entityManager.close();
+            return retorno;
+        }
+        entityManager.close();
+        return null;
+
+    }
+
+
 }
