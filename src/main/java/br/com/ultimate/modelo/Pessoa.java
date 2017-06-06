@@ -13,9 +13,19 @@ public abstract class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     private LocalDate dtCadastro;
+    private String nome;
     @OneToOne
     private Usuario usuario;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public int getId() {
         return id;

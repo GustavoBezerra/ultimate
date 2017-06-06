@@ -6,15 +6,5 @@ package br.com.ultimate.modelo;
  */
 public enum NumeroAula {
 
-    AULA_1(1), AULA_2(2), AULA_3(3), AULA_4(4), AULA_5(5), AULA_6(6), AULA_7(7), AULA_8(8), AULA_9(9), AULA_10(10);
-
-    private int aula;
-
-    NumeroAula(int aula){
-        this.aula = aula;
-    }
-
-    public int getNumeroAula(){
-        return this.aula;
-    }
+    AULA_1, AULA_2, AULA_3, AULA_4, AULA_5, AULA_6, AULA_7, AULA_8, AULA_9, AULA_10;
 }

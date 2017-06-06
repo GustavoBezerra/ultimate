@@ -1,6 +1,8 @@
 package br.com.ultimate.modelo;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 /**
  * Created by Gustavo on 27/05/2017.
@@ -10,7 +12,10 @@ import javax.persistence.Entity;
 public class Aluno extends Pessoa{
 
     //private int matricula;
+    @Enumerated(EnumType.STRING)
     private NumeroLivro livro;
+
+    @Enumerated(EnumType.STRING)
     private NumeroAula numeroAula;
 
     public NumeroLivro getLivro() {

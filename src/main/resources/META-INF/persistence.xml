@@ -6,6 +6,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	
 	<persistence-unit name="ultimate-postgres">
 		<!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
+		<class>br.com.ultimate.converter.LocalDateAttributeConverter</class>
 		<class>br.com.ultimate.modelo.Usuario</class>
 		<class>br.com.ultimate.modelo.Aluno</class>
 		<properties>

@@ -1,6 +1,8 @@
 package br.com.ultimate.testes;
 
 import br.com.ultimate.modelo.Aluno;
+import br.com.ultimate.modelo.NumeroAula;
+import br.com.ultimate.modelo.NumeroLivro;
 import br.com.ultimate.modelo.Usuario;
 import br.com.ultimate.util.JPAUtil;
 
@@ -20,6 +22,9 @@ public class Main {
         Aluno aluno = new Aluno();
         aluno.setUsuario(usuario);
         aluno.setDtCadastro(LocalDate.now());
+        aluno.setNome("Teste");
+        aluno.setLivro(NumeroLivro.LIVRO_1);
+        aluno.setNumeroAula(NumeroAula.AULA_3);
 
         EntityManager entityManager = new JPAUtil().getEntityManager();
         entityManager.getTransaction().begin();
