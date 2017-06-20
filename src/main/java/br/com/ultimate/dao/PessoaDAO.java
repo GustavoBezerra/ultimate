@@ -1,11 +1,8 @@
 package br.com.ultimate.dao;
 
-import br.com.ultimate.modelo.Aluno;
 import br.com.ultimate.modelo.Pessoa;
 import br.com.ultimate.modelo.Usuario;
-import br.com.ultimate.util.JPAUtil;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -14,16 +11,12 @@ import java.util.List;
 
 /**
  * Created by Gustavo on 06/06/2017.
+ * DAO responsável pelo acesso aos dados de Pessoa
  */
-public class PessoaDAO<T extends Pessoa, Integer>{
+public class PessoaDAO extends AbstractJDBCDAO implements IDAO<Pessoa, Integer>{
 
-    protected EntityManager entityManager = new JPAUtil().getEntityManager();
-
-    private void openConnection(){
-        entityManager = new JPAUtil().getEntityManager();
-    }
-
-    public void salvar(T entity) {
+    @Override
+    public void salvar(Pessoa entity) {
         openConnection();
 
         entityManager.getTransaction().begin();
@@ -36,7 +29,21 @@ public class PessoaDAO<T extends Pessoa, Integer>{
         entityManager.close();
     }
 
-    public T atualizar(T entity) {
+    @Override
+    public List<Pessoa> getList(Class<Pessoa> persistedClass) {
+        openConnection();
+
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Pessoa> query = builder.createQuery(persistedClass);
+        query.from(persistedClass);
+        List<Pessoa> resultList = entityManager.createQuery(query).getResultList();
+
+        entityManager.close();
+        return resultList;
+    }
+
+    @Override
+    public Pessoa atualizar(Pessoa entity) {
         openConnection();
 
         EntityTransaction t = entityManager.getTransaction();
@@ -49,13 +56,14 @@ public class PessoaDAO<T extends Pessoa, Integer>{
         return entity;
     }
 
-    public void remover(Class<T> persistedClass, Integer id) {
-        T entity = encontrar(persistedClass, id);
+    @Override
+    public void remover(Class<Pessoa> persistedClass, Integer id) {
+        Pessoa entity = encontrar(persistedClass, id);
         openConnection();
 
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
-        T mergedEntity = entityManager.merge(entity);
+        Pessoa mergedEntity = entityManager.merge(entity);
         entityManager.remove(mergedEntity);
         entityManager.flush();
         tx.commit();
@@ -63,22 +71,11 @@ public class PessoaDAO<T extends Pessoa, Integer>{
         entityManager.close();
     }
 
-    public List<T> getList(Class<T> persistedClass) {
+    @Override
+    public Pessoa encontrar(Class<Pessoa> persistedClass, Integer id) {
         openConnection();
 
-        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<T> query = builder.createQuery(persistedClass);
-        query.from(persistedClass);
-        List<T> resultList = entityManager.createQuery(query).getResultList();
-
-        entityManager.close();
-        return resultList;
-    }
-
-    public T encontrar(Class<T> persistedClass, Integer id) {
-        openConnection();
-
-        T t = entityManager.find(persistedClass, id);
+        Pessoa t = entityManager.find(persistedClass, id);
 
         entityManager.close();
         return t;
@@ -107,8 +104,5 @@ public class PessoaDAO<T extends Pessoa, Integer>{
         }
         entityManager.close();
         return null;
-
     }
-
-
 }
