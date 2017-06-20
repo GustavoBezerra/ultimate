@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Gustavo on 20/06/2017.
  * Interface DAO
  */
-public interface IDAO<T, U> {
+public interface IDAO<T, Integer> {
 
     public void salvar(T entity);
 
