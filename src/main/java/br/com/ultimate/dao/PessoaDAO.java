@@ -1,5 +1,6 @@
 package br.com.ultimate.dao;
 
+import br.com.ultimate.modelo.Aluno;
 import br.com.ultimate.modelo.Pessoa;
 import br.com.ultimate.modelo.Usuario;
 
@@ -13,10 +14,10 @@ import java.util.List;
  * Created by Gustavo on 06/06/2017.
  * DAO responsável pelo acesso aos dados de Pessoa
  */
-public class PessoaDAO extends AbstractJDBCDAO implements IDAO<Pessoa, Integer>{
+public class PessoaDAO<T extends Pessoa> extends AbstractJDBCDAO<T> {
 
     @Override
-    public void salvar(Pessoa entity) {
+    public void salvar(T entity) {
         openConnection();
 
         entityManager.getTransaction().begin();
@@ -30,34 +31,30 @@ public class PessoaDAO extends AbstractJDBCDAO implements IDAO<Pessoa, Integer>{
     }
 
     @Override
-    public List<Pessoa> getList(Class<Pessoa> persistedClass) {
+    public List<T> getList(Class<T> persistedClass) {
         openConnection();
 
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Pessoa> query = builder.createQuery(persistedClass);
+        CriteriaQuery<T> query = builder.createQuery(persistedClass);
         query.from(persistedClass);
-        List<Pessoa> resultList = entityManager.createQuery(query).getResultList();
+        List<T> resultList = entityManager.createQuery(query).getResultList();
 
         entityManager.close();
         return resultList;
     }
 
     @Override
-    public Pessoa atualizar(Pessoa entity) {
+    public T encontrar(Class<T> persistedClass, Integer id) {
         openConnection();
 
-        EntityTransaction t = entityManager.getTransaction();
-        t.begin();
-        entityManager.merge(entity);
-        entityManager.flush();
-        t.commit();
+        T t = entityManager.find(persistedClass, id);
 
         entityManager.close();
-        return entity;
+        return t;
     }
 
     @Override
-    public void remover(Class<Pessoa> persistedClass, Integer id) {
+    public void remover(Class<T> persistedClass, Integer id) {
         Pessoa entity = encontrar(persistedClass, id);
         openConnection();
 
@@ -71,38 +68,5 @@ public class PessoaDAO extends AbstractJDBCDAO implements IDAO<Pessoa, Integer>{
         entityManager.close();
     }
 
-    @Override
-    public Pessoa encontrar(Class<Pessoa> persistedClass, Integer id) {
-        openConnection();
 
-        Pessoa t = entityManager.find(persistedClass, id);
-
-        entityManager.close();
-        return t;
-    }
-
-    public Pessoa buscarUsuario(String login, String senha){
-        openConnection();
-        String jpql = "select u from Usuario u where u.login=:pLogin "
-                + "and u.senha=:pSenha";
-
-        TypedQuery<Usuario> user = entityManager.createQuery(jpql, Usuario.class);
-
-        user.setParameter("pLogin", login);
-        user.setParameter("pSenha", senha);
-
-
-        Usuario usuario = user.getSingleResult();
-
-        if(usuario != null){
-            jpql = "select p from Pessoa p where p.usuario=:pUsuario";
-            TypedQuery<Pessoa> query = entityManager.createQuery(jpql, Pessoa.class);
-            query.setParameter("pUsuario", usuario);
-            Pessoa retorno = query.getSingleResult();
-            entityManager.close();
-            return retorno;
-        }
-        entityManager.close();
-        return null;
-    }
 }

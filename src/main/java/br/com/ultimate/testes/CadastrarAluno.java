@@ -15,19 +15,20 @@ import java.time.LocalDate;
 public class CadastrarAluno {
 
     public static void main(String[] args) {
-        PessoaDAO pessoaDAO = new PessoaDAO();
-        Usuario usuario = new Usuario();
-        Aluno aluno = new Aluno();
-
-        usuario.setLogin("gu");
-        usuario.setSenha("123");
-
-        aluno.setDtCadastro(LocalDate.now());
-        aluno.setNome("Gustavo Bezerra");
-        aluno.setLivro(NumeroLivro.LIVRO_3);
-        aluno.setNumeroAula(NumeroAula.AULA_2);
-        aluno.setUsuario(usuario);
-
-        pessoaDAO.salvar(aluno);
+//        PessoaDAO pessoaDAO = new PessoaDAO();
+//        Usuario usuario = new Usuario();
+//        Aluno aluno = new Aluno();
+//
+//        usuario.setLogin("gu");
+//        usuario.setSenha("123");
+//
+//        aluno.setDtCadastro(LocalDate.now());
+//        aluno.setNome("Gustavo Bezerra");
+//        aluno.setLivro(NumeroLivro.LIVRO_3);
+//        aluno.setNumeroAula(NumeroAula.AULA_2);
+//        aluno.setUsuario(usuario);
+//        aluno.setMatricula(123);
+//
+//        pessoaDAO.salvar(aluno);
     }
 }

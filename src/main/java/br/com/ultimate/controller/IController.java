@@ -10,6 +10,4 @@ import org.json.JSONObject;
 public interface IController {
 
     Gson gson = new Gson();
-
-    JSONObject json = new JSONObject();
 }

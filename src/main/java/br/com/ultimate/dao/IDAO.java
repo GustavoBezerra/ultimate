@@ -3,10 +3,9 @@ package br.com.ultimate.dao;
 import java.util.List;
 
 /**
- * Created by Gustavo on 20/06/2017.
- * Interface DAO
+ * Created by Gustavo on 23/06/2017.
  */
-public interface IDAO<T, Integer> {
+public interface IDAO<T> {
 
     public void salvar(T entity);
 

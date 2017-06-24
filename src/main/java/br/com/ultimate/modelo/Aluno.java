@@ -9,9 +9,10 @@ import javax.persistence.Enumerated;
  * Classe responsável por representar um Aluno
  */
 @Entity
-public class Aluno extends Pessoa{
+public class Aluno extends Pessoa {
 
-    //private int matricula;
+
+    private int matricula;
     @Enumerated(EnumType.STRING)
     private NumeroLivro livro;
 
@@ -32,5 +33,13 @@ public class Aluno extends Pessoa{
 
     public void setNumeroAula(NumeroAula numeroAula) {
         this.numeroAula = numeroAula;
+    }
+
+    public int getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(int matricula) {
+        this.matricula = matricula;
     }
 }

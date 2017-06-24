@@ -1,8 +1,9 @@
 package br.com.ultimate.controller;
 
-import br.com.ultimate.dao.PessoaDAO;
+import br.com.ultimate.dao.LoginDAO;
 import br.com.ultimate.modelo.Pessoa;
 import com.google.gson.Gson;
+import org.json.JSONObject;
 
 import javax.persistence.NoResultException;
 import javax.ws.rs.*;
@@ -16,16 +17,16 @@ import javax.ws.rs.core.Response;
 
 @Path("/login")
 public class LoginController implements IController{
-    private PessoaDAO pessoaDAO = new PessoaDAO();
+    private LoginDAO loginDAO = new LoginDAO();
+    private JSONObject json = new JSONObject();
 
     @GET
     @Path("/{login}/{senha}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUsuario(@PathParam("login") String login, @PathParam("senha") String senha){
-
         Pessoa retorno;
         try{
-            retorno = pessoaDAO.buscarUsuario(login, senha);
+            retorno = loginDAO.buscarUsuario(login, senha);
 
             json.put("tipo", retorno.getClass().getSimpleName());
             json.put("usuario", new Gson().toJson(retorno));
