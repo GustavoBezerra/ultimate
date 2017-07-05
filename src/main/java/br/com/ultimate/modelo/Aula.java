@@ -1,7 +1,6 @@
 package br.com.ultimate.modelo;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -12,13 +11,10 @@ import java.util.List;
 public class Aula {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @ManyToOne
     private HorarioAula horario;
-
-    private LocalDate diaAula;
 
     @ManyToOne
     private Professor professor;
@@ -45,14 +41,6 @@ public class Aula {
         this.horario = horario;
     }
 
-    public LocalDate getDiaAula() {
-        return diaAula;
-    }
-
-    public void setDiaAula(LocalDate diaAula) {
-        this.diaAula = diaAula;
-    }
-
     public Professor getProfessor() {
         return professor;
     }
@@ -67,13 +55,5 @@ public class Aula {
 
     public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
-    }
-
-    public TipoAula getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoAula tipo) {
-        this.tipo = tipo;
     }
 }

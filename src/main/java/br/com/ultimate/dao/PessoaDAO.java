@@ -22,18 +22,5 @@ public class PessoaDAO<T extends Pessoa> extends DAO<T> {
         entityManager.close();
     }
 
-    @Override
-    public T atualizar(T entity){
-        openConnection();
-        entityManager.getTransaction().begin();
-
-        entityManager.merge(entity.getUsuario());
-        entityManager.merge(entity);
-
-        entityManager.getTransaction().commit();
-        entityManager.close();
-
-        return entity;
-    }
 
 }
