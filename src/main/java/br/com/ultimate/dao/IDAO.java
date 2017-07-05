@@ -11,7 +11,7 @@ public interface IDAO<T> {
 
     public T atualizar(T entity);
 
-    public void remover(Class<T> persistedClass, Integer id);
+    public void remover(T entity);
 
     public List<T> getList(Class<T> persistedClass);
 

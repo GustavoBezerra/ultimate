@@ -1,27 +1,29 @@
 package br.com.ultimate.modelo;
 
-import java.time.LocalDateTime;
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * Created by Gustavo on 27/05/2017.
  * Classe reponsável por representar uma Aula
  */
-public abstract class Aula {
+@Entity
+public class Aula {
 
+    @Id
     private int id;
-    private Sala sala;
-    private LocalDateTime dtInicio;
-    private LocalDateTime dtFim;
-    private List<Nota> notas;
 
-    public Sala getSala() {
-        return sala;
-    }
+    @ManyToOne
+    private HorarioAula horario;
 
-    public void setSala(Sala sala) {
-        this.sala = sala;
-    }
+    @ManyToOne
+    private Professor professor;
+
+    @OneToMany
+    private List<Aluno> alunos;
+
+    @Enumerated(EnumType.STRING)
+    private TipoAula tipo;
 
     public int getId() {
         return id;
@@ -31,27 +33,27 @@ public abstract class Aula {
         this.id = id;
     }
 
-    public LocalDateTime getDtInicio() {
-        return dtInicio;
+    public HorarioAula getHorario() {
+        return horario;
     }
 
-    public void setDtInicio(LocalDateTime dtInicio) {
-        this.dtInicio = dtInicio;
+    public void setHorario(HorarioAula horario) {
+        this.horario = horario;
     }
 
-    public LocalDateTime getDtFim() {
-        return dtFim;
+    public Professor getProfessor() {
+        return professor;
     }
 
-    public void setDtFim(LocalDateTime dtFim) {
-        this.dtFim = dtFim;
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
-    public List<Nota> getNotas() {
-        return notas;
+    public List<Aluno> getAlunos() {
+        return alunos;
     }
 
-    public void setNotas(List<Nota> notas) {
-        this.notas = notas;
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
     }
 }
