@@ -34,6 +34,18 @@ public class AlunoController implements IController{
         return Response.status(Response.Status.OK).entity(json.toString()).build();
     }
 
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response alterarAluno(String usuario){
+        Aluno aluno = gson.fromJson(usuario, Aluno.class);
+        pessoaDAO.atualizar(aluno);
+
+        json.put("tipo", aluno.getClass().getSimpleName());
+        json.put("usuario", new Gson().toJson(aluno));
+
+        return Response.status(Response.Status.OK).entity(json.toString()).build();
+    }
+
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -64,5 +76,17 @@ public class AlunoController implements IController{
         List list = pessoaDAO.getList(Aluno.class);
         json.put("alunos", new Gson().toJson(list));
         return Response.status(Response.Status.OK).entity(json.toString()).build();
+    }
+
+    @DELETE
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response excluirHorario(@PathParam("id") int id){
+        Aluno aluno = new Aluno();
+        aluno.setId(id);
+
+        pessoaDAO.remover(aluno);
+
+        return Response.status(Response.Status.OK).build();
     }
 }

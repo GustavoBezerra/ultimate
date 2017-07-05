@@ -2,7 +2,6 @@ package br.com.ultimate.modelo;
 
 import com.google.gson.Gson;
 
-import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +19,14 @@ public class Usuario {
     private int id;
     private String login;
     private String senha;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getLogin() {
         return login;
