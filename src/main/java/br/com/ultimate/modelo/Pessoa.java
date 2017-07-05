@@ -16,7 +16,7 @@ public abstract class Pessoa {
 
     private LocalDate dtCadastro;
     private String nome;
-    @OneToOne
+    @OneToOne(orphanRemoval=true)
     private Usuario usuario;
 
     public String getNome() {
